@@ -1,0 +1,43 @@
+Assignment 1: Advanced Baselines
+
+Course: Natural Language Processing (Master's in Machine Learning)
+Weight: 2.5% of Final Grade
+Estimated Time: 15-20 Hours
+Deadline: February 18th
+
+This assignment serves as the foundational component for your Final Capstone Project. The objective is to rigorously test your understanding of experimental methodology, baseline establishment, and systematic evaluation before moving on to complex Transformer models. Remember the central philosophy: "Baselines Before Breakthroughs."
+1. Dataset Requirements
+
+You must select a dataset that meets strict academic standards (min. 5,000 train / 1,000 test examples). Your dataset must come from one of two sources:
+
+    Option A (Recommended): Established Shared Tasks (e.g., SemEval, CoNLL, IberLEF).
+    Option B: A rigorously self-annotated dataset (requires comprehensive guidelines and Inter-Annotator Agreement metrics).
+    Strictly Prohibited: Simple toy datasets (e.g., generic Kaggle, unverified HuggingFace datasets).
+
+2. Mandatory Methodology
+
+Your experimental setup must adhere to the following scientific standards:
+
+    Data Splitting: Use Stratified Splitting for Train/Test sets to maintain class balance.
+    Reproducibility: Set a fixed random seed (random_state=42) for all operations.
+    Evaluation: Use 5-Fold Stratified Cross-Validation. The primary metric must be F1-Macro.
+    Feature Representation (Crucial): You must implement and compare two approaches:
+        Sparse: TF-IDF (Recommended) or CountVectors/BM25.
+        Dense: Averaged Word Embeddings (Word2Vec, GloVe, or FastText).
+
+3. Required Experiments & Ablation Studies
+
+To achieve full marks, you must conduct the following investigations:
+
+    N-gram Exploration: Compare performance of Unigrams vs. Bigrams/Trigrams.
+    Preprocessing Ablation: Test the impact of cleaning strategies (Raw vs. Lowercase, Stopword removal, Lemmatization, etc.).
+    Hyperparameter Optimization: Perform Grid Search or Randomized Search for your models (e.g., tuning C in Logistic Regression, alpha in Naive Bayes).
+
+4. Error Analysis
+
+Quantitative metrics are not enough. Your report must include:
+
+    Confusion Matrix: Analysis of class confusions.
+    Discriminative Features: Extraction and analysis of the top weighted words/n-grams.
+    Qualitative Failure Analysis: Manual categorization of at least 5 specific misclassified examples (e.g., sarcasm, negation failure, ambiguity).
+
