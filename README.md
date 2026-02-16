@@ -1,4 +1,23 @@
+# Assignment 1: Caption-Question Relevance Classification
+## Advanced Baselines for NLP
+
 This assignment serves as the foundational component for your Final Capstone Project. The objective is to rigorously test your understanding of experimental methodology, baseline establishment, and systematic evaluation before moving on to complex Transformer models. Remember the central philosophy: "Baselines Before Breakthroughs."
+
+## Implementation Summary
+
+**Task**: Binary classification to determine if a question is related to its corresponding caption
+
+**Dataset**: RSVLM-QA (Remote Sensing Vision-Language Model - Question Answering)
+- Source: JSONL format with captions, questions, answers, and image tags
+- Size: 120,000+ samples (exceeds minimum requirement)
+- Preprocessing: Converted to Parquet format for efficient access
+
+**Key Methodological Improvements**:
+1. **Semantic Distance-Based Negative Sampling**: Instead of random shuffling, uses FastText embeddings of image tags to pair questions with semantically distant captions, preventing false negatives
+2. **Enhanced Context**: Concatenates Question + Answer for richer semantic features
+3. **Comprehensive Embedding Comparison**: Compares both GloVe and FastText embeddings for dense representations
+
+---
 
 ## 1. Dataset Requirements
 You must select a dataset that meets strict academic standards (min. 5,000 train / 1,000 test examples). Your dataset must come from one of two sources:
@@ -32,3 +51,51 @@ Please submit the following via MiAulario:
 
 - Code Repository: A link to your organized repository (structure: data/, notebooks/, src/, README.md, requirements.txt).
 - Report (PDF): Maximum 3 pages (excluding visualizations) covering methodology, results, sparse vs. dense comparison, and error analysis.
+
+---
+
+## Implementation Status ✅
+
+All assignment requirements have been fully implemented:
+
+### ✅ Dataset Requirements
+- [x] Min. 5,000 train / 1,000 test examples (120,000+ available)
+- [x] Stratified train/test split with random_state=42
+- [x] Class-balanced dataset with equal positive/negative examples
+
+### ✅ Mandatory Methodology
+- [x] Stratified Train/Test Split (80/20)
+- [x] Fixed random seed (random_state=42)
+- [x] 5-Fold Stratified Cross-Validation
+- [x] Primary metric: F1-Macro
+- [x] Sparse features: TF-IDF with multiple configurations
+- [x] Dense features: GloVe AND FastText embeddings compared
+
+### ✅ Required Experiments
+- [x] N-gram Exploration: Unigrams, Bigrams, Trigrams
+- [x] Preprocessing Ablation: Raw, Lowercase, Clean, Aggressive
+- [x] Hyperparameter Optimization: Grid Search for Logistic Regression
+- [x] Model Comparison: Logistic Regression, Naive Bayes, Random Forest
+
+### ✅ Error Analysis
+- [x] Confusion Matrix with detailed breakdown
+- [x] Discriminative Features: Top 20 features analyzed
+- [x] Qualitative Failure Analysis: 10 misclassified examples examined
+- [x] Feature visualization and interpretation
+
+### 🎯 Methodological Improvements
+- [x] Semantic distance-based negative sampling using tag embeddings
+- [x] FastText embeddings for robust tag vectorization
+- [x] Question-Answer concatenation for enhanced context
+- [x] Empirical validation of improved negative sampling strategy
+- [x] Comprehensive sparse vs dense feature comparison
+
+## Files in Repository
+
+- `convert_jsonl_to_parquet.ipynb`: Data preprocessing and parquet conversion with tags
+- `caption_question_relevance_baseline.ipynb`: Complete baseline experiments and analysis
+- `RSVLM-QA.jsonl`: Source dataset
+- `RSVLM-QA-captions.parquet`: Processed captions with tags
+- `RSVLM-QA-questions.parquet`: Processed questions and answers
+- `README.md`: This file
+- `pyproject.toml`: Project dependencies
