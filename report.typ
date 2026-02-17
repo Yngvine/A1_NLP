@@ -58,43 +58,31 @@ We constructed a balanced dataset of positive and negative pairs:
 // Insert a sentence here such as: "The mean cosine distance of our negative pairs is X.XX
 // vs Y.YY for random sampling, a +Z.Z% improvement."
 
-The final dataset is split into training (80%) and testing (20%) sets using stratified sampling (`random_state=42`) to maintain class balance. The total dataset size exceeds 120,000 examples, far surpassing the minimum requirement of 6,000.
+The final dataset is split into training (80%) and testing (20%) sets using stratified sampling (`random_state=42`) to maintain class balance. The total dataset size exceeds 120,000 examples.
 
 = Text Preprocessing
 <text-preprocessing>
 
 We define and compare four preprocessing strategies as an ablation study:
 
-#table(
-  columns: (auto, 1fr),
-  inset: 8pt,
-  align: (left, left),
-  [*Strategy*], [*Operations*],
-  [Raw], [No preprocessing],
-  [Lowercase], [Case folding],
-  [Clean], [Case folding + punctuation removal],
-  [Aggressive], [Case folding + punctuation removal + stopword removal (scikit-learn English stop words)],
-)
+- *Raw*: No preprocessing.
+- *Lowercase*: Case folding.
+- *Clean*: Case folding + punctuation removal.
+- *Aggressive*: Case folding + punctuation removal + stopword removal (scikit-learn English stop words).
 
 All strategies are applied uniformly to the combined `[Caption] [SEP] [Question Answer]` input string before feature extraction.
 
 = Feature Representations
 
-We implement and compare two families of features as required by the assignment.
+We implement and compare two families of features.
 
 == Sparse Features: TF-IDF
 
 We use scikit-learn's `TfidfVectorizer` with `max_features=5000`. Three n-gram configurations are tested:
 
-#table(
-  columns: (auto, auto),
-  inset: 8pt,
-  align: (left, left),
-  [*Configuration*], [*`ngram_range`*],
-  [Unigrams], [(1, 1)],
-  [Bigrams (uni+bi)], [(1, 2)],
-  [Trigrams (uni+bi+tri)], [(1, 3)],
-)
+- *Unigrams*: `ngram_range=(1, 1)`
+- *Bigrams (uni+bi)*: `ngram_range=(1, 2)`
+- *Trigrams (uni+bi+tri)*: `ngram_range=(1, 3)`
 
 == Dense Features: Pre-trained Word Embeddings
 
