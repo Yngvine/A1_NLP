@@ -53,12 +53,14 @@ We constructed a balanced dataset of positive and negative pairs:
 + Build a pairwise cosine-distance matrix across all 13,820 images.
 + For every question, sample a caption from the *top 25% most distant* images, ensuring the negative pair is genuinely unrelated.
 
-// TODO(manual): After running the notebook, confirm the exact mean/median distance values
-// from the "Negative Pair Distance Statistics" output and the % improvement over random.
-// Insert a sentence here such as: "The mean cosine distance of our negative pairs is X.XX
-// vs Y.YY for random sampling, a +Z.Z% improvement."
+The mean cosine distance of our negative pairs is 0.1583 vs 0.1193 for random sampling, a +32.7% improvement.
 
-The final dataset is split into training (80%) and testing (20%) sets using stratified sampling (`random_state=42`) to maintain class balance. The total dataset size exceeds 120,000 examples.
+#figure(
+  image("distribution.png", width:90%),
+  caption: [Distribution of cosine distances between question and caption embeddings for random sampling (red) vs. tag-based semantic distance sampling (green).],
+)
+
+The final dataset is split into training (80%) and testing (20%) sets using stratified sampling (`random_state=42`) to maintain class balance. The total dataset size is 297.116 examples, with a 50/50 representation of each class.
 
 = Text Preprocessing
 <text-preprocessing>
@@ -120,42 +122,34 @@ The experiments are organized as follows:
 = Results
 <results>
 
-// TODO(manual): Run the notebook end-to-end and fill in the actual numeric results below.
-// The placeholder values (X.XXXX) should be replaced with the real F1-Macro scores
-// from the notebook output cells.
-
 == N-gram Comparison (Experiment 1)
 
 #table(
-  columns: (auto, auto, auto),
+  columns: (auto, auto, auto, auto),
   inset: 8pt,
-  align: (left, center, center),
-  [*Configuration*], [*CV F1-Macro*], [*Test F1-Macro*],
-  [TF-IDF Unigrams + LogReg], [X.XXXX ± X.XXXX], [X.XXXX],
-  [TF-IDF Bigrams + LogReg], [X.XXXX ± X.XXXX], [X.XXXX],
-  [TF-IDF Trigrams + LogReg], [X.XXXX ± X.XXXX], [X.XXXX],
+  align: (left, center, center, center),
+  [*Configuration*], [*CV F1-Macro*], [*Test F1-Macro*], [*Test Accuracy*],
+  [TF-IDF Unigrams + LogReg], [0.6877 ± 0.0012], [0.6879], [0.6881],
+  [TF-IDF Bigrams + LogReg], [0.6969 ± 0.0020], [0.6965], [0.6965],
+  [TF-IDF Trigrams + LogReg], [0.6944 ± 0.0023], [0.6944], [0.6944],
 )
 
-// TODO(manual): Replace X.XXXX with actual values from Experiment 1 output.
-
-The bigram configuration is expected to provide the optimal balance between expressiveness and model complexity, capturing useful two-word patterns (e.g., spatial relation phrases like "located in") without the sparsity explosion of trigrams.
+The results indicate that including bigrams improves performance over using only unigrams (Test F1-Macro $+0.86\%$). This suggests that capturing local context through two-word phrases (e.g., "residential area", "water body") provides valuable discriminative signals. However, extending to trigrams does not yield further improvement, likely due to increased data sparsity which offsets the potential gain from longer context.
 
 == Preprocessing Ablation (Experiment 2)
 
 #table(
-  columns: (auto, auto, auto),
+  columns: (auto, auto, auto, auto),
   inset: 8pt,
-  align: (left, center, center),
-  [*Strategy*], [*CV F1-Macro*], [*Test F1-Macro*],
-  [Raw], [X.XXXX ± X.XXXX], [X.XXXX],
-  [Lowercase], [X.XXXX ± X.XXXX], [X.XXXX],
-  [Clean], [X.XXXX ± X.XXXX], [X.XXXX],
-  [Aggressive], [X.XXXX ± X.XXXX], [X.XXXX],
+  align: (left, center, center, center),
+  [*Strategy*], [*CV F1-Macro*], [*Test F1-Macro*], [*Test Accuracy*],
+  [Raw], [0.6969 ± 0.0020], [0.6965], [0.6965],
+  [Lowercase], [0.6969 ± 0.0020], [0.6965], [0.6965],
+  [Clean], [0.6965 ± 0.0019], [0.6983], [0.6983],
+  [Aggressive], [0.6948 ± 0.0023], [0.6980], [0.6980],
 )
 
-// TODO(manual): Replace X.XXXX with actual values from Experiment 2 output.
-
-We expect lightweight preprocessing (lowercase) to perform best. Aggressive stopword removal may harm performance because function words (prepositions, articles) carry structural information relevant to spatial descriptions in remote-sensing captions (e.g., "in the", "on the").
+The results suggest that minimal preprocessing is sufficient for this task. The *Raw* and *Lowercase* strategies yield identical performance, indicating that capitalization does not carry significant signal. Interestingly, while *Clean* and *Aggressive* strategies show a slight drop in cross-validation performance, they achieve marginally higher scores on the test set. However, given the overlap in standard deviations and the small magnitude of differences ($<0.2\%$), we conclude that sophisticated preprocessing does not provide a robust advantage over simple case folding for TF-IDF based models in this domain.
 
 == Model Comparison (Experiment 3)
 
@@ -164,70 +158,60 @@ We expect lightweight preprocessing (lowercase) to perform best. Aggressive stop
   inset: 8pt,
   align: (left, center, center, center),
   [*Model*], [*CV F1-Macro*], [*Test F1-Macro*], [*Test Accuracy*],
-  [Logistic Regression], [X.XXXX ± X.XXXX], [X.XXXX], [X.XXXX],
-  [Naive Bayes], [X.XXXX ± X.XXXX], [X.XXXX], [X.XXXX],
-  [Random Forest], [X.XXXX ± X.XXXX], [X.XXXX], [X.XXXX],
+  [Logistic Regression], [0.6969 ± 0.0020], [0.6965], [0.6965],
+  [Naive Bayes], [0.6671 ± 0.0022], [0.6705], [0.6708],
+  [Random Forest], [0.8030 ± 0.0014], [0.8071], [0.8072],
 )
 
-// TODO(manual): Replace X.XXXX with actual values from Experiment 3 output.
+The Random Forest classifier significantly outperforms both Logistic Regression and Naive Bayes, achieving a Test F1-Macro of 0.8071 ($+15.8\%$ relative to LogReg). This suggests that non-linear interactions between features are crucial for this task. However, this performance comes at a substantial computational cost: while the linear models train in under a minute, Random Forest requires approximately 300 minutes to complete the training process on this dataset.
 
 == Hyperparameter Optimization (Experiment 4)
 
-Grid Search over Logistic Regression parameters:
-
-// TODO(manual): Fill in best_params and scores from Grid Search output.
+We ran the grid search over Logistic Regression parameters because it is the model that that offers the best balance of performance and training time for TF-IDF features.
 
 #table(
   columns: (auto, auto),
   inset: 8pt,
   align: (left, left),
   [*Parameter*], [*Best Value*],
-  [Regularization $C$], [TODO],
-  [Solver], [TODO],
-  [CV F1-Macro], [X.XXXX],
-  [Test F1-Macro], [X.XXXX],
+  [Regularization $C$], [0.1],
+  [Solver], [liblinear],
+  [CV F1-Macro], [0.6989],
+  [Test F1-Macro], [0.6896],
 )
 
-// TODO(manual): Replace TODO and X.XXXX with actual Grid Search results.
+The grid search identifies $C=0.1$ with the `liblinear` solver as the optimal configuration. This preference for stronger regularization (compared to the default $C=1.0$) suggests that controlling model complexity is beneficial when dealing with high-dimensional sparse features (TF-IDF bigrams), likely helping to reduce overfitting. Despite the optimization, the performance gain over the baseline Logistic Regression model is modest, confirming that the default hyperparameters are already close to optimal for this specific task and feature set.
 
 == Sparse vs Dense Feature Comparison (Experiments 3 & 5)
 
 #table(
-  columns: (auto, auto, auto, auto),
+  columns: (auto, auto, auto, auto, auto),
   inset: 8pt,
   align: (left, center, center, center),
-  [*Representation*], [*Model*], [*Dimensions*], [*Test F1-Macro*],
-  [TF-IDF (Sparse)], [LogReg], [5,000], [X.XXXX],
-  [GloVe (Dense)], [LogReg], [100], [X.XXXX],
-  [FastText (Dense)], [LogReg], [300], [X.XXXX],
+  [*Representation*], [*Model*], [*Dimensions*], [*Test F1-Macro*], [*Test Accuracy*],
+  [TF-IDF (Sparse)], [LogReg], [5,000], [0.6896], [-],
+  [GloVe (Dense)], [LogReg], [100], [0.6513], [0.6517],
+  [FastText (Dense)], [LogReg], [300], [0.6528], [0.6534],
 )
 
-// TODO(manual): Replace X.XXXX with actual values.
+The results demonstrate that the sparse TF-IDF representation significantly outperforms both dense embedding methods (GloVe and FastText). TF-IDF achieves a Test F1-Macro of 0.6896, compared to 0.6513 for GloVe and 0.6528 for FastText. This suggests that for determining caption-question relevance, precise lexical matching (captured by TF-IDF) is more critical than the semantic generalization provided by averaged word embeddings. The aggregation of word embeddings into a single document vector likely dilutes key discriminative signals present in specific keywords, which are preserved in the high-dimensional sparse representation of TF-IDF. Additionally, despite FastText having a larger vocabulary and higher dimensionality than GloVe, it offers only a marginal improvement ($+0.15\%$), reinforcing the limitation of mean-pooled embeddings for this pair-matching task.
 
-TF-IDF captures discriminative n-grams effectively for this task: direct lexical matching between caption and question is a stronger signal than semantic similarity. The high-dimensional sparse representation can identify specific caption-question patterns, whereas averaging word embeddings over-generalizes, potentially treating semantically similar but unrelated pairs as related. Between the two dense approaches, FastText benefits from subword information that handles morphological variants and out-of-vocabulary tokens better than GloVe.
-
-// TODO(manual): Reference the "Sparse vs Dense Feature Comparison" bar chart
-// generated by the notebook (Section 8.1). Include it as a figure if desired.
-// #figure(
-//   image("figures/sparse_vs_dense.png", width: 70%),
-//   caption: [Sparse (TF-IDF) vs Dense (Word Embeddings) feature comparison.],
-// ) <sparse-dense>
+#figure(
+  image("sparseVSdense.png", width: 90%),
+  caption: [Comparison of Test F1-Macro scores for sparse (TF-IDF) vs. dense (GloVe, FastText) feature representations using Logistic Regression.],
+)
 
 = Error Analysis
 
 == Confusion Matrix
 
+#figure(
+  image("confusionMatrix.png", width: 90%),
+  caption: [Confusion matrix for the best-performing model (Random Forest with TF-IDF bigrams) on the test set.],
+)
+
 // TODO(manual): Insert the confusion matrix figure generated by the notebook (Section 9.1).
 // Also fill in the TP/TN/FP/FN counts below from the notebook output.
-
-// TODO(manual): Insert the confusion matrix figure here.
-// The confusion matrix for the best model (Logistic Regression + TF-IDF Bigrams) is shown in @confusion-matrix.
-
-// TODO(manual): Uncomment and adjust the figure path once you export the plot.
-// #figure(
-//   image("figures/confusion_matrix.png", width: 60%),
-//   caption: [Confusion matrix for the best model (Logistic Regression + TF-IDF Bigrams).],
-// ) <confusion-matrix>
 
 // Counts from notebook output:
 // - True Negatives: ???
@@ -242,11 +226,10 @@ TF-IDF captures discriminative n-grams effectively for this task: direct lexical
 
 We extract the top-weighted TF-IDF features from the Logistic Regression coefficients. Features with the highest positive coefficients predict the *Related* class, while those with the most negative coefficients predict *Unrelated*.
 
-// TODO(manual): Insert the discriminative features bar chart from notebook Section 9.2.
-// #figure(
-//   image("figures/discriminative_features.png", width: 80%),
-//   caption: [Top 10 discriminative features for Related (left) and Unrelated (right) classes.],
-// ) <disc-features>
+#figure(
+  image("top10features.png", width: 90%),
+  caption: [Top discriminative features for Related (positive coefficients) and Unrelated (negative coefficients) classes from the Logistic Regression model.],
+)
 
 // TODO(manual): List the top 5 features for each class from the notebook output.
 // Format as:
