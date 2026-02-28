@@ -1,101 +1,84 @@
-# Assignment 1: Caption-Question Relevance Classification
-## Advanced Baselines for NLP
+# Assignment 2: Neural Sequence Models
 
-This assignment serves as the foundational component for your Final Capstone Project. The objective is to rigorously test your understanding of experimental methodology, baseline establishment, and systematic evaluation before moving on to complex Transformer models. Remember the central philosophy: "Baselines Before Breakthroughs."
+This assignment extends your Assignment 1 baseline work to neural sequence models. You will implement two mandatory neural architectures and demonstrate whether added complexity yields meaningful performance gains on your specific task.
 
-## Implementation Summary
+## 1. Continuity Requirement
+**CRITICAL:** You must use the same dataset and same evaluation metrics from Assignment 1. This ensures direct comparison and demonstrates whether neural models justify their computational costs.
 
-**Task**: Binary classification to determine if a question is related to its corresponding caption
+- Keep the same train/validation/test splits
+- Report the same primary metric (e.g., F1-Macro, entity-level F1, BLEU, ROUGE)
+- Compare directly against your Assignment 1 baseline
 
-**Dataset**: RSVLM-QA (Remote Sensing Vision-Language Model - Question Answering)
-- Source: JSONL format with captions, questions, answers, and image tags
-- Size: 120,000+ samples (exceeds minimum requirement)
-- Preprocessing: Converted to Parquet format for efficient access
+## 2. Task-Specific Implementations
+Your implementation depends on your task type:
 
-**Key Methodological Improvements**:
-1. **Semantic Distance-Based Negative Sampling**: Instead of random shuffling, uses FastText embeddings of image tags to pair questions with semantically distant captions, preventing false negatives
-2. **Enhanced Context**: Concatenates Question + Answer for richer semantic features
-3. **Comprehensive Embedding Comparison**: Compares both GloVe and FastText embeddings for dense representations
+- **Text Classification:** Sequence encoder (LSTM/Transformer) + pooling + classification head
+- **Sequence Labeling (NER, POS):** Token-level predictions with sequence-to-sequence architecture
+- **Generation (Summarization, Translation):** Encoder-decoder with attention
 
----
+## 3. Required Models — Both Are Mandatory for Everyone
+**⚠ MANDATORY FOR ALL STUDENTS, REGARDLESS OF DATASET SIZE:**
 
-## 1. Dataset Requirements
-You must select a dataset that meets strict academic standards (min. 5,000 train / 1,000 test examples). Your dataset must come from one of two sources:
+- One recurrent model: **LSTM or GRU**, trained from scratch (bidirectional recommended)
+- One **Transformer** model: Either trained from scratch or a fine-tuned pre-trained model (e.g., BERT, RoBERTa, DistilBERT)
 
-- Option A (Recommended): Established Shared Tasks (e.g., SemEval, CoNLL, IberLEF).
-- Option B: A rigorously self-annotated dataset (requires comprehensive guidelines and Inter-Annotator Agreement metrics).
-- Strictly Prohibited: Simple toy datasets (e.g., generic Kaggle, unverified HuggingFace datasets).
-## 2. Mandatory Methodology
-Your experimental setup must adhere to the following scientific standards:
+Both models must be compared against your Assignment 1 baseline. There are no exceptions based on dataset size.
 
-- Data Splitting: Use Stratified Splitting for Train/Test sets to maintain class balance.
-- Reproducibility: Set a fixed random seed (random_state=42) for all operations.
-- Evaluation: Use 5-Fold Stratified Cross-Validation. The primary metric must be F1-Macro.
-- Feature Representation (Crucial): You must implement and compare two approaches:
-  - Sparse: TF-IDF (Recommended) or CountVectors/BM25.
-  - Dense: Averaged Word Embeddings (Word2Vec, GloVe, or FastText).
-## 3. Required Experiments & Ablation Studies
-To achieve full marks, you must conduct the following investigations:
+### Choosing Your Transformer Variant
+- **Large datasets (>10K examples):** Transformer from scratch is feasible and recommended
+- **Small datasets (<10K examples):** Use a fine-tuned pre-trained model (BERT, RoBERTa, DistilBERT) as your Transformer — you must still implement an LSTM from scratch alongside it
 
-- N-gram Exploration: Compare performance of Unigrams vs. Bigrams/Trigrams.
-- Preprocessing Ablation: Test the impact of cleaning strategies (Raw vs. Lowercase, Stopword removal, Lemmatization, etc.).
-- Hyperparameter Optimization: Perform Grid Search or Randomized Search for your models (e.g., tuning C in Logistic Regression, alpha in Naive Bayes).
-## 4. Error Analysis
-Quantitative metrics are not enough. Your report must include:
+### Handling Small Datasets for the LSTM
+If your dataset is small, train the LSTM from scratch regardless — this comparison is precisely what makes the experiment valuable. For the Transformer component, fine-tuning a pre-trained model is the recommended approach. You may additionally use:
+- **Transfer Learning:** Fine-tune pre-trained models for the Transformer requirement (recommended for small datasets)
+- **Data Augmentation:** Back-translation, paraphrasing, or synonym replacement to supplement training data
 
-- Confusion Matrix: Analysis of class confusions.
-- Discriminative Features: Extraction and analysis of the top weighted words/n-grams.
-- Qualitative Failure Analysis: Manual categorization of at least 5 specific misclassified examples (e.g., sarcasm, negation failure, ambiguity).
-## 5. Deliverables
-Please submit the following via MiAulario:
+## 4. Required Experiments
+You must conduct the following systematic investigations:
 
-- Code Repository: A link to your organized repository (structure: data/, notebooks/, src/, README.md, requirements.txt).
-- Report (PDF): Maximum 3 pages (excluding visualizations) covering methodology, results, sparse vs. dense comparison, and error analysis.
+### Experiment 1: Architecture Comparison
+- Compare all three models (Assignment 1 baseline, LSTM/GRU, Transformer/BERT) using your task's metric
+- Report training time, GPU memory, inference speed, and parameter count
 
----
+### Experiment 2: Learning Curve Analysis
+- Train models on 25%, 50%, 75%, and 100% of training data
+- Plot performance vs. training size
+- Analyze: At what size do neural models surpass baselines? Does the Transformer benefit more from additional data than the LSTM?
 
-## Implementation Status ✅
+### Experiment 3: Ablation Studies
+Conduct at least two ablations on your best-performing model. Choose appropriate ablations for your model type:
+- **LSTM:** Unidirectional vs. Bidirectional, number of layers, hidden dimensions
+- **Transformer (from scratch):** Attention heads, layers, pooling strategies
+- **Pre-trained models:** Frozen vs. unfrozen layers, learning rates, fine-tuning epochs, different model variants (BERT vs. RoBERTa vs. DistilBERT)
 
-All assignment requirements have been fully implemented:
+### Experiment 4: Error Analysis
+- Find 5+ examples where neural models fixed baseline errors
+- Find 5+ examples where neural models introduced new errors
+- Visualize attention weights (if using Transformers)
 
-### ✅ Dataset Requirements
-- [x] Min. 5,000 train / 1,000 test examples (120,000+ available)
-- [x] Stratified train/test split with random_state=42
-- [x] Class-balanced dataset with equal positive/negative examples
+### Experiment 5: Computational Cost Analysis
+- Compare training time and inference speed across all three models
+- Discuss practical deployment considerations
 
-### ✅ Mandatory Methodology
-- [x] Stratified Train/Test Split (80/20)
-- [x] Fixed random seed (random_state=42)
-- [x] 5-Fold Stratified Cross-Validation
-- [x] Primary metric: F1-Macro
-- [x] Sparse features: TF-IDF with multiple configurations
-- [x] Dense features: GloVe AND FastText embeddings compared
+## 5. Training Requirements
+Ensure your models are properly trained:
 
-### ✅ Required Experiments
-- [x] N-gram Exploration: Unigrams, Bigrams, Trigrams
-- [x] Preprocessing Ablation: Raw, Lowercase, Clean, Aggressive
-- [x] Hyperparameter Optimization: Grid Search for Logistic Regression
-- [x] Model Comparison: Logistic Regression, Naive Bayes, Random Forest
+- **Early Stopping:** Monitor validation metric with patience (5-7 epochs)
+- **Gradient Clipping:** Max norm of 1.0 for RNNs/LSTMs
+- **Learning Rate Scheduling:** Use warmup for Transformers
+- **Fixed Random Seeds:** Set `random_state=42` everywhere for reproducibility
 
-### ✅ Error Analysis
-- [x] Confusion Matrix with detailed breakdown
-- [x] Discriminative Features: Top 20 features analyzed
-- [x] Qualitative Failure Analysis: 10 misclassified examples examined
-- [x] Feature visualization and interpretation
+## 6. Deliverables
+Submit via MiAulario:
 
-### 🎯 Methodological Improvements
-- [x] Semantic distance-based negative sampling using tag embeddings
-- [x] FastText embeddings for robust tag vectorization
-- [x] Question-Answer concatenation for enhanced context
-- [x] Empirical validation of improved negative sampling strategy
-- [x] Comprehensive sparse vs dense feature comparison
-
-## Files in Repository
-
-- `convert_jsonl_to_parquet.ipynb`: Data preprocessing and parquet conversion with tags
-- `caption_question_relevance_baseline.ipynb`: Complete baseline experiments and analysis
-- `RSVLM-QA.jsonl`: Source dataset
-- `RSVLM-QA-captions.parquet`: Processed captions with tags
-- `RSVLM-QA-questions.parquet`: Processed questions and answers
-- `README.md`: This file
-- `pyproject.toml`: Project dependencies
+- **Code Repository:** Well-organized with structure:
+  - `models/` - PyTorch model implementations (must include both LSTM and Transformer)
+  - `notebooks/` - Training and evaluation notebooks
+  - `results/` - Training curves, confusion matrices, attention visualizations
+  - `README.md` - Setup and execution instructions
+  - `requirements.txt` - All dependencies with versions
+- **Report (PDF):** Maximum 4 pages (excluding visualizations):
+  - **Introduction (0.5 pages):** Recap Assignment 1 baseline
+  - **Methodology (1 page):** Both architectures, training setup, data handling
+  - **Results (1.5 pages):** All 5 required experiments
+  - **Analysis (1 page):** Error analysis, practical recommendations
