@@ -1,0 +1,128 @@
+[
+  {
+    "question_id": "q1",
+    "question": "What feature runs parallel to the water in the image?",
+    "ground_truth_answer": "A major road.",
+    "relevant_document_ids": ["caption-876"],
+    "question_type": "spatial"
+  },
+  {
+    "question_id": "q2",
+    "question": "What is situated in the bottom right corner connected by paved paths?",
+    "ground_truth_answer": "A small building.",
+    "relevant_document_ids": ["caption-432"],
+    "question_type": "spatial"
+  },
+  {
+    "question_id": "q3",
+    "question": "Where are the small islands covered with dense marshland located?",
+    "ground_truth_answer": "Within the river.",
+    "relevant_document_ids": ["caption-694"],
+    "question_type": "spatial"
+  },
+  {
+    "question_id": "q4",
+    "question": "How many ships are there in the image?",
+    "ground_truth_answer": "There are 1 ship in the image.",
+    "relevant_document_ids": ["caption-296"],
+    "question_type": "count"
+  },
+  {
+    "question_id": "q5",
+    "question": "How many ships are there in the image?",
+    "ground_truth_answer": "There are 5 ships in the image.",
+    "relevant_document_ids": ["caption-318"],
+    "question_type": "count"
+  },
+  {
+    "question_id": "q6",
+    "question": "How many ships are there in the image?",
+    "ground_truth_answer": "There are 7 ships in the image.",
+    "relevant_document_ids": ["caption-321"],
+    "question_type": "count"
+  },
+  {
+    "question_id": "q7",
+    "question": "Are there any planes in the image?",
+    "ground_truth_answer": "Yes, there are 1 plane.",
+    "relevant_document_ids": ["caption-728"],
+    "question_type": "presence"
+  },
+  {
+    "question_id": "q8",
+    "question": "Are there any ships in the image?",
+    "ground_truth_answer": "Yes, there are 5 ships.",
+    "relevant_document_ids": ["caption-809"],
+    "question_type": "presence"
+  },
+  {
+    "question_id": "q9",
+    "question": "Are there any planes in the image?",
+    "ground_truth_answer": "Yes, there are 9 planes.",
+    "relevant_document_ids": ["caption-259"],
+    "question_type": "presence"
+  },
+  {
+    "question_id": "q10",
+    "question": "What is the general condition of the lake in the image?",
+    "ground_truth_answer": "The lake appears calm.",
+    "relevant_document_ids": ["caption-459"],
+    "question_type": "overall"
+  },
+  {
+    "question_id": "q11",
+    "question": "What is the dominant type of land cover in the image?",
+    "ground_truth_answer": "Extensive forest cover.",
+    "relevant_document_ids": ["caption-71"],
+    "question_type": "overall"
+  },
+  {
+    "question_id": "q12",
+    "question": "What distinctive pattern do the water-filled plots create in the image?",
+    "ground_truth_answer": "A distinctive grid pattern.",
+    "relevant_document_ids": ["caption-831"],
+    "question_type": "overall"
+  },
+  {
+    "question_id": "q13",
+    "question": "What types of vehicles are primarily seen in the large paved parking lot?",
+    "ground_truth_answer": "Trailers.",
+    "relevant_document_ids": ["caption-765"],
+    "question_type": "object"
+  },
+  {
+    "question_id": "q14",
+    "question": "What types of vehicles are positioned at the gates and on the apron?",
+    "ground_truth_answer": "Airplanes.",
+    "relevant_document_ids": ["caption-905"],
+    "question_type": "object"
+  },
+  {
+    "question_id": "q15",
+    "question": "What types of vehicles are predominantly parked in the paved parking lot?",
+    "ground_truth_answer": "School buses.",
+    "relevant_document_ids": ["caption-298"],
+    "question_type": "object"
+  },
+  {
+    "question_id": "q16",
+    "question": "Is the lot mostly paved or unpaved?",
+    "ground_truth_answer": "The lot is mostly unpaved.",
+    "relevant_document_ids": ["caption-185"],
+    "question_type": "quantity"
+  },
+  {
+    "question_id": "q17",
+    "question": "Is the shoreline mostly sandy or rocky?",
+    "ground_truth_answer": "The shoreline is predominantly rocky.",
+    "relevant_document_ids": ["caption-641"],
+    "question_type": "quantity"
+  },
+  {
+    "question_id": "q18",
+    "question": "Are the buildings mostly large or medium-sized in the image?",
+    "ground_truth_answer": "The buildings are mostly medium-sized.",
+    "relevant_document_ids": ["caption-27"],
+    "question_type": "quantity"
+  }
+]

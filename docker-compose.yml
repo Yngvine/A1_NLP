@@ -1,0 +1,83 @@
+services:
+  llama-server:
+    image: ghcr.io/ggml-org/llama.cpp:server-cuda
+    gpus: all
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./models:/models
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+    command: >
+      --model /models/mistral-7b-instruct-v0.2.Q4_K_M.gguf
+      --port 8080
+      --ctx-size 4096
+      --n-predict 512
+      --n-gpu-layers 999
+      --threads 4
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
+
+  chromadb:
+    image: chromadb/chroma:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma-data:/chroma/chroma
+    environment:
+      ANONYMIZED_TELEMETRY: "false"
+
+  flask-api:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/data
+    environment:
+      CHROMA_HOST: chromadb
+      CHROMA_PORT: 8000
+      MINIO_HOST: minio
+      MINIO_PORT: 9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      LLM_HOST: llama-server
+      LLM_PORT: 8080
+      CAPTIONS_PATH: /data/RSVLM-QA-captions.parquet
+      QUESTIONS_PATH: /data/RSVLM-QA-questions.parquet
+      DEFAULT_INGEST_LIMIT: 1000
+    depends_on:
+      - chromadb
+      - minio
+      - llama-server
+
+  streamlit:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      FLASK_API_URL: http://flask-api:5000
+    depends_on:
+      - flask-api
+
+volumes:
+  minio-data:
+  chroma-data:
