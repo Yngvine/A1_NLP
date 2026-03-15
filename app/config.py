@@ -22,7 +22,8 @@ CAPTIONS_PATH = os.getenv("CAPTIONS_PATH", "RSVLM-QA-captions.parquet")
 QUESTIONS_PATH = os.getenv("QUESTIONS_PATH", "RSVLM-QA-questions.parquet")
 
 # Ingestion
-DEFAULT_INGEST_LIMIT = int(os.getenv("DEFAULT_INGEST_LIMIT", "1000"))
+# 0 means ingest all available captions.
+DEFAULT_INGEST_LIMIT = int(os.getenv("DEFAULT_INGEST_LIMIT", "0"))
 
 # Embedding
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"

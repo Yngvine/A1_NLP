@@ -61,7 +61,7 @@ services:
       LLM_PORT: 8080
       CAPTIONS_PATH: /data/RSVLM-QA-captions.parquet
       QUESTIONS_PATH: /data/RSVLM-QA-questions.parquet
-      DEFAULT_INGEST_LIMIT: 1000
+      DEFAULT_INGEST_LIMIT: 0
     depends_on:
       - chromadb
       - minio

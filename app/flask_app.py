@@ -80,9 +80,13 @@ def health():
 def upload_document():
     # Case 1: JSON body - ingest captions from dataset
     if request.is_json:
-        data = request.get_json()
+        data = request.get_json() or {}
         limit = data.get("limit", DEFAULT_INGEST_LIMIT)
         source = data.get("source", "dataset")
+
+        # Allow null/0 to mean "ingest all captions".
+        if limit is None:
+            limit = 0
 
         if source == "dataset":
             result = get_indexer().ingest(limit=limit)

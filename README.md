@@ -58,8 +58,10 @@ Wait ~30-60 seconds for llama-server to load the model.
 ```bash
 curl -X POST http://localhost:5000/documents \
   -H "Content-Type: application/json" \
-  -d '{"source": "dataset", "limit": 1000}'
+  -d '{"source": "dataset"}'
 ```
+
+By default, the API ingests all available captions. You can still pass `"limit": N` to ingest a subset.
 
 ### 4. Query the system
 
@@ -87,7 +89,12 @@ Or open the Streamlit UI at **http://localhost:8501**.
 # Health check
 curl http://localhost:5000/health
 
-# Ingest 500 captions
+# Ingest all captions (default)
+curl -X POST http://localhost:5000/documents \
+  -H "Content-Type: application/json" \
+  -d '{"source": "dataset"}'
+
+# Ingest 500 captions (optional subset)
 curl -X POST http://localhost:5000/documents \
   -H "Content-Type: application/json" \
   -d '{"source": "dataset", "limit": 500}'
@@ -143,22 +150,23 @@ cd eval
 python evaluate.py
 ```
 
-Computes Hit Rate@k, MRR, and Precision@k for k=1, 3, 5.
+Computes exact and relaxed retrieval metrics (Hit Rate, MRR, Precision) for k=1, 3, 5.
+Relaxed metrics are useful for ambiguous questions that appear multiple times with different valid document IDs.
 
 ## Configuration
 
 Key constants in `app/config.py` (overridable via environment variables):
 
-| Variable               | Default          | Description                       |
-| ---------------------- | ---------------- | --------------------------------- |
-| `DEFAULT_INGEST_LIMIT` | 1000             | Number of captions to ingest      |
-| `EMBEDDING_MODEL`      | all-MiniLM-L6-v2 | Sentence transformer model        |
-| `DEFAULT_TOP_K`        | 5                | Number of results to retrieve     |
-| `MAX_AGENT_ITERATIONS` | 3                | Max LangGraph agent search rounds |
+| Variable               | Default          | Description                              |
+| ---------------------- | ---------------- | ---------------------------------------- |
+| `DEFAULT_INGEST_LIMIT` | 0                | Number of captions to ingest (`0` = all) |
+| `EMBEDDING_MODEL`      | all-MiniLM-L6-v2 | Sentence transformer model               |
+| `DEFAULT_TOP_K`        | 5                | Number of results to retrieve            |
+| `MAX_AGENT_ITERATIONS` | 3                | Max LangGraph agent search rounds        |
 
 ## Known Limitations
 
 - The in-memory document registry is lost on container restart (captions remain in ChromaDB and MinIO)
 - llama-server startup can take 30-60 seconds; queries return 503 until the LLM is ready
-- Evaluation metrics depend on the default 1000-caption ingestion; results change with different limits
+- Evaluation metrics depend on ingestion coverage and question ambiguity; exact metrics are strict while relaxed metrics are more tolerant for repeated question templates
 - Some count/presence questions may match multiple captions with similar content (e.g., "How many ships?")

@@ -41,7 +41,7 @@ tab_ingest, tab_query, tab_docs = st.tabs(
 with tab_ingest:
     st.header("Ingest Captions from Dataset")
     limit = st.number_input(
-        "Number of captions to ingest", min_value=1, max_value=13820, value=1000
+        "Number of captions to ingest (0 = All)", min_value=0, max_value=13820, value=0
     )
     if st.button("Ingest Captions"):
         with st.spinner(f"Ingesting {limit} captions..."):

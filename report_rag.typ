@@ -114,6 +114,25 @@ If the LLM is temporarily unavailable, the API returns a graceful fallback answe
 - Health endpoint reports per-service readiness and global status.
 - First startup can be slow while model tensors are loaded into memory.
 
+= UI Screenshots
+
+The following screenshots show the deployed interface and the evidence returned by the system.
+
+#figure(
+  image("streamlit_working.png", width: 100%),
+  caption: [Main query view in Streamlit: question input, top-k selector, generated answer, and agent reasoning trace.]
+)
+
+#figure(
+  image("sources.png", width: 100%),
+  caption: [Retrieved source passages with document id, image path, tags, relevance score, and text evidence.]
+)
+
+#figure(
+  image("documents.png", width: 100%),
+  caption: [Indexed document list view showing ingested entries and management actions.]
+)
+
 = How To Run
 
 1. Start services:
@@ -143,6 +162,41 @@ If the LLM is temporarily unavailable, the API returns a graceful fallback answe
     -H "Content-Type: application/json" \
     -d '{"question": "What kind of area has a highway interchange?", "top_k": 5}'
 ]
+
+= Evaluation Results
+
+Evaluation was executed from the `eval` directory using:
+
+#block[
+  python .\\evaluate.py
+]
+
+Environment notes from the run:
+- `sentence-transformers==5.3.0` (first run downloaded `all-MiniLM-L6-v2` model files).
+- On Windows, Hugging Face emitted a symlink cache warning; this does not invalidate results, but may increase disk usage.
+
+#table(
+  columns: (auto, auto, auto, auto, auto, auto, auto),
+  inset: 8pt,
+  align: (left, center, center, center, center, center, center),
+  [*k*], [*Hit (Exact)*], [*MRR (Exact)*], [*Prec (Exact)*], [*Hit (Relaxed)*], [*MRR (Relaxed)*], [*Prec (Relaxed)*],
+  [1], [0.0000], [0.0000], [0.0000], [0.0000], [0.0000], [0.0000],
+  [3], [0.0556], [0.0278], [0.0185], [0.1667], [0.0833], [0.0556],
+  [5], [0.0556], [0.0278], [0.0111], [0.1667], [0.0833], [0.0333],
+)
+
+Additional summary:
+- Successes at k=5 (exact): 1/18
+- Failures at k=5 (exact): 17/18
+- Successes at k=5 (relaxed): 3/18
+- Failures at k=5 (relaxed): 15/18
+- Results file: `../results/eval_results.json`
+
+Brief interpretation:
+- Exact-ID metrics are very strict for this dataset because many questions are template-like (for example repeated count/presence forms) and several captions can be semantically valid even when the retrieved id is not the single annotated id.
+- In this run we also evaluated against a much larger index (all captions), which increases lexical confounders and makes exact matching substantially harder than in a small subset.
+- For our real use case (RAG QA), utility is driven more by whether retrieved passages provide correct supporting evidence than by recovering one specific id at rank 1. This is why qualitative answer quality in the UI can still be useful even when exact retrieval metrics are low.
+- Therefore, these retrieval metrics should be interpreted as a lower-bound diagnostic, not as the only indicator of end-user quality.
 
 = Conclusion
 

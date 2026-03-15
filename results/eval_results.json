@@ -1,0 +1,692 @@
+{
+  "questions": [
+    {
+      "question_id": "q1",
+      "question": "What feature runs parallel to the water in the image?",
+      "ground_truth_ids": [
+        "caption-876"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-876"
+      ],
+      "retrieved_ids": [
+        "caption-8945",
+        "caption-6798",
+        "caption-6617",
+        "caption-6436",
+        "caption-6161"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "spatial"
+    },
+    {
+      "question_id": "q2",
+      "question": "What is situated in the bottom right corner connected by paved paths?",
+      "ground_truth_ids": [
+        "caption-432"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-432"
+      ],
+      "retrieved_ids": [
+        "caption-9693",
+        "caption-9801",
+        "caption-11966",
+        "caption-6267",
+        "caption-12074"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "spatial"
+    },
+    {
+      "question_id": "q3",
+      "question": "Where are the small islands covered with dense marshland located?",
+      "ground_truth_ids": [
+        "caption-694"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-694"
+      ],
+      "retrieved_ids": [
+        "caption-11542",
+        "caption-7759",
+        "caption-11657",
+        "caption-8990",
+        "caption-11618"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "spatial"
+    },
+    {
+      "question_id": "q4",
+      "question": "How many ships are there in the image?",
+      "ground_truth_ids": [
+        "caption-296"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-296",
+        "caption-318",
+        "caption-321"
+      ],
+      "retrieved_ids": [
+        "caption-3118",
+        "caption-321",
+        "caption-5883",
+        "caption-3453",
+        "caption-1528"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": true,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.5,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.2,
+      "type": "count"
+    },
+    {
+      "question_id": "q5",
+      "question": "How many ships are there in the image?",
+      "ground_truth_ids": [
+        "caption-318"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-296",
+        "caption-318",
+        "caption-321"
+      ],
+      "retrieved_ids": [
+        "caption-3118",
+        "caption-321",
+        "caption-5883",
+        "caption-3453",
+        "caption-1528"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": true,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.5,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.2,
+      "type": "count"
+    },
+    {
+      "question_id": "q6",
+      "question": "How many ships are there in the image?",
+      "ground_truth_ids": [
+        "caption-321"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-296",
+        "caption-318",
+        "caption-321"
+      ],
+      "retrieved_ids": [
+        "caption-3118",
+        "caption-321",
+        "caption-5883",
+        "caption-3453",
+        "caption-1528"
+      ],
+      "hit_exact": true,
+      "hit_relaxed": true,
+      "reciprocal_rank_exact": 0.5,
+      "reciprocal_rank_relaxed": 0.5,
+      "precision_exact": 0.2,
+      "precision_relaxed": 0.2,
+      "type": "count"
+    },
+    {
+      "question_id": "q7",
+      "question": "Are there any planes in the image?",
+      "ground_truth_ids": [
+        "caption-728"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-259",
+        "caption-728"
+      ],
+      "retrieved_ids": [
+        "caption-13594",
+        "caption-756",
+        "caption-730",
+        "caption-1749",
+        "caption-1815"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "presence"
+    },
+    {
+      "question_id": "q8",
+      "question": "Are there any ships in the image?",
+      "ground_truth_ids": [
+        "caption-809"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-809"
+      ],
+      "retrieved_ids": [
+        "caption-3118",
+        "caption-5883",
+        "caption-321",
+        "caption-1528",
+        "caption-1699"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "presence"
+    },
+    {
+      "question_id": "q9",
+      "question": "Are there any planes in the image?",
+      "ground_truth_ids": [
+        "caption-259"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-259",
+        "caption-728"
+      ],
+      "retrieved_ids": [
+        "caption-13594",
+        "caption-756",
+        "caption-730",
+        "caption-1749",
+        "caption-1815"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "presence"
+    },
+    {
+      "question_id": "q10",
+      "question": "What is the general condition of the lake in the image?",
+      "ground_truth_ids": [
+        "caption-459"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-459"
+      ],
+      "retrieved_ids": [
+        "caption-1579",
+        "caption-1662",
+        "caption-8789",
+        "caption-3028",
+        "caption-4947"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "overall"
+    },
+    {
+      "question_id": "q11",
+      "question": "What is the dominant type of land cover in the image?",
+      "ground_truth_ids": [
+        "caption-71"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-71"
+      ],
+      "retrieved_ids": [
+        "caption-3322",
+        "caption-10655",
+        "caption-800",
+        "caption-10504",
+        "caption-11633"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "overall"
+    },
+    {
+      "question_id": "q12",
+      "question": "What distinctive pattern do the water-filled plots create in the image?",
+      "ground_truth_ids": [
+        "caption-831"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-831"
+      ],
+      "retrieved_ids": [
+        "caption-6827",
+        "caption-6521",
+        "caption-9065",
+        "caption-7614",
+        "caption-4542"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "overall"
+    },
+    {
+      "question_id": "q13",
+      "question": "What types of vehicles are primarily seen in the large paved parking lot?",
+      "ground_truth_ids": [
+        "caption-765"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-765"
+      ],
+      "retrieved_ids": [
+        "caption-429",
+        "caption-1702",
+        "caption-13641",
+        "caption-1899",
+        "caption-1914"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "object"
+    },
+    {
+      "question_id": "q14",
+      "question": "What types of vehicles are positioned at the gates and on the apron?",
+      "ground_truth_ids": [
+        "caption-905"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-905"
+      ],
+      "retrieved_ids": [
+        "caption-1188",
+        "caption-1261",
+        "caption-1611",
+        "caption-13723",
+        "caption-474"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "object"
+    },
+    {
+      "question_id": "q15",
+      "question": "What types of vehicles are predominantly parked in the paved parking lot?",
+      "ground_truth_ids": [
+        "caption-298"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-298"
+      ],
+      "retrieved_ids": [
+        "caption-429",
+        "caption-1702",
+        "caption-1899",
+        "caption-1165",
+        "caption-1206"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "object"
+    },
+    {
+      "question_id": "q16",
+      "question": "Is the lot mostly paved or unpaved?",
+      "ground_truth_ids": [
+        "caption-185"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-185"
+      ],
+      "retrieved_ids": [
+        "caption-1702",
+        "caption-13608",
+        "caption-1565",
+        "caption-1811",
+        "caption-11166"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "quantity"
+    },
+    {
+      "question_id": "q17",
+      "question": "Is the shoreline mostly sandy or rocky?",
+      "ground_truth_ids": [
+        "caption-641"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-641"
+      ],
+      "retrieved_ids": [
+        "caption-8560",
+        "caption-441",
+        "caption-8882",
+        "caption-11615",
+        "caption-1664"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "quantity"
+    },
+    {
+      "question_id": "q18",
+      "question": "Are the buildings mostly large or medium-sized in the image?",
+      "ground_truth_ids": [
+        "caption-27"
+      ],
+      "relaxed_ground_truth_ids": [
+        "caption-27"
+      ],
+      "retrieved_ids": [
+        "caption-10535",
+        "caption-9938",
+        "caption-11140",
+        "caption-40",
+        "caption-12165"
+      ],
+      "hit_exact": false,
+      "hit_relaxed": false,
+      "reciprocal_rank_exact": 0.0,
+      "reciprocal_rank_relaxed": 0.0,
+      "precision_exact": 0.0,
+      "precision_relaxed": 0.0,
+      "type": "quantity"
+    }
+  ],
+  "metrics": {
+    "k=1": {
+      "exact": {
+        "hit_rate": 0.0,
+        "mrr": 0.0,
+        "precision": 0.0
+      },
+      "relaxed": {
+        "hit_rate": 0.0,
+        "mrr": 0.0,
+        "precision": 0.0
+      }
+    },
+    "k=3": {
+      "exact": {
+        "hit_rate": 0.0556,
+        "mrr": 0.0278,
+        "precision": 0.0185
+      },
+      "relaxed": {
+        "hit_rate": 0.1667,
+        "mrr": 0.0833,
+        "precision": 0.0556
+      }
+    },
+    "k=5": {
+      "exact": {
+        "hit_rate": 0.0556,
+        "mrr": 0.0278,
+        "precision": 0.0111
+      },
+      "relaxed": {
+        "hit_rate": 0.1667,
+        "mrr": 0.0833,
+        "precision": 0.0333
+      }
+    }
+  },
+  "qualitative": {
+    "success_examples_exact": [
+      {
+        "question_id": "q6",
+        "question": "How many ships are there in the image?",
+        "ground_truth_ids": [
+          "caption-321"
+        ],
+        "relaxed_ground_truth_ids": [
+          "caption-296",
+          "caption-318",
+          "caption-321"
+        ],
+        "retrieved_ids": [
+          "caption-3118",
+          "caption-321",
+          "caption-5883",
+          "caption-3453",
+          "caption-1528"
+        ],
+        "hit_exact": true,
+        "hit_relaxed": true,
+        "reciprocal_rank_exact": 0.5,
+        "reciprocal_rank_relaxed": 0.5,
+        "precision_exact": 0.2,
+        "precision_relaxed": 0.2,
+        "type": "count"
+      }
+    ],
+    "failure_examples_exact": [
+      {
+        "question_id": "q1",
+        "question": "What feature runs parallel to the water in the image?",
+        "ground_truth_ids": [
+          "caption-876"
+        ],
+        "relaxed_ground_truth_ids": [
+          "caption-876"
+        ],
+        "retrieved_ids": [
+          "caption-8945",
+          "caption-6798",
+          "caption-6617",
+          "caption-6436",
+          "caption-6161"
+        ],
+        "hit_exact": false,
+        "hit_relaxed": false,
+        "reciprocal_rank_exact": 0.0,
+        "reciprocal_rank_relaxed": 0.0,
+        "precision_exact": 0.0,
+        "precision_relaxed": 0.0,
+        "type": "spatial"
+      },
+      {
+        "question_id": "q2",
+        "question": "What is situated in the bottom right corner connected by paved paths?",
+        "ground_truth_ids": [
+          "caption-432"
+        ],
+        "relaxed_ground_truth_ids": [
+          "caption-432"
+        ],
+        "retrieved_ids": [
+          "caption-9693",
+          "caption-9801",
+          "caption-11966",
+          "caption-6267",
+          "caption-12074"
+        ],
+        "hit_exact": false,
+        "hit_relaxed": false,
+        "reciprocal_rank_exact": 0.0,
+        "reciprocal_rank_relaxed": 0.0,
+        "precision_exact": 0.0,
+        "precision_relaxed": 0.0,
+        "type": "spatial"
+      }
+    ],
+    "success_examples_relaxed": [
+      {
+        "question_id": "q4",
+        "question": "How many ships are there in the image?",
+        "ground_truth_ids": [
+          "caption-296"
+        ],
+        "relaxed_ground_truth_ids": [
+          "caption-296",
+          "caption-318",
+          "caption-321"
+        ],
+        "retrieved_ids": [
+          "caption-3118",
+          "caption-321",
+          "caption-5883",
+          "caption-3453",
+          "caption-1528"
+        ],
+        "hit_exact": false,
+        "hit_relaxed": true,
+        "reciprocal_rank_exact": 0.0,
+        "reciprocal_rank_relaxed": 0.5,
+        "precision_exact": 0.0,
+        "precision_relaxed": 0.2,
+        "type": "count"
+      },
+      {
+        "question_id": "q5",
+        "question": "How many ships are there in the image?",
+        "ground_truth_ids": [
+          "caption-318"
+        ],
+        "relaxed_ground_truth_ids": [
+          "caption-296",
+          "caption-318",
+          "caption-321"
+        ],
+        "retrieved_ids": [
+          "caption-3118",
+          "caption-321",
+          "caption-5883",
+          "caption-3453",
+          "caption-1528"
+        ],
+        "hit_exact": false,
+        "hit_relaxed": true,
+        "reciprocal_rank_exact": 0.0,
+        "reciprocal_rank_relaxed": 0.5,
+        "precision_exact": 0.0,
+        "precision_relaxed": 0.2,
+        "type": "count"
+      },
+      {
+        "question_id": "q6",
+        "question": "How many ships are there in the image?",
+        "ground_truth_ids": [
+          "caption-321"
+        ],
+        "relaxed_ground_truth_ids": [
+          "caption-296",
+          "caption-318",
+          "caption-321"
+        ],
+        "retrieved_ids": [
+          "caption-3118",
+          "caption-321",
+          "caption-5883",
+          "caption-3453",
+          "caption-1528"
+        ],
+        "hit_exact": true,
+        "hit_relaxed": true,
+        "reciprocal_rank_exact": 0.5,
+        "reciprocal_rank_relaxed": 0.5,
+        "precision_exact": 0.2,
+        "precision_relaxed": 0.2,
+        "type": "count"
+      }
+    ],
+    "failure_examples_relaxed": [
+      {
+        "question_id": "q1",
+        "question": "What feature runs parallel to the water in the image?",
+        "ground_truth_ids": [
+          "caption-876"
+        ],
+        "relaxed_ground_truth_ids": [
+          "caption-876"
+        ],
+        "retrieved_ids": [
+          "caption-8945",
+          "caption-6798",
+          "caption-6617",
+          "caption-6436",
+          "caption-6161"
+        ],
+        "hit_exact": false,
+        "hit_relaxed": false,
+        "reciprocal_rank_exact": 0.0,
+        "reciprocal_rank_relaxed": 0.0,
+        "precision_exact": 0.0,
+        "precision_relaxed": 0.0,
+        "type": "spatial"
+      },
+      {
+        "question_id": "q2",
+        "question": "What is situated in the bottom right corner connected by paved paths?",
+        "ground_truth_ids": [
+          "caption-432"
+        ],
+        "relaxed_ground_truth_ids": [
+          "caption-432"
+        ],
+        "retrieved_ids": [
+          "caption-9693",
+          "caption-9801",
+          "caption-11966",
+          "caption-6267",
+          "caption-12074"
+        ],
+        "hit_exact": false,
+        "hit_relaxed": false,
+        "reciprocal_rank_exact": 0.0,
+        "reciprocal_rank_relaxed": 0.0,
+        "precision_exact": 0.0,
+        "precision_relaxed": 0.0,
+        "type": "spatial"
+      }
+    ]
+  }
+}

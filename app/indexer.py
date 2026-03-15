@@ -27,7 +27,9 @@ class CaptionIndexer:
     def load_captions(self, limit: int = DEFAULT_INGEST_LIMIT) -> pd.DataFrame:
         df = pd.read_parquet(CAPTIONS_PATH)
         df = df[df["caption"].str.len() > 0]
-        return df.head(limit)
+        if limit is None or int(limit) <= 0:
+            return df
+        return df.head(int(limit))
 
     def ingest(self, limit: int = DEFAULT_INGEST_LIMIT) -> dict:
         df = self.load_captions(limit)
